@@ -2,10 +2,10 @@
  * @Copyright(C),
  * @FileName:.c
  * @Author: HongYuJia 
- * @Teammate£º
+ * @Teammateï¼š
  * @Version: V3.0
  * @Date:2021.4.13
- * @Description:  CAN2Ó¦ÓÃ£¨°üÀ¨²ÃÅĞÏµÍ³ĞÅÏ¢µÄ´«Êä¡¢AC°å¼äĞÅÏ¢µÄ½»»¥£©
+ * @Description:  CAN2åº”ç”¨ï¼ˆåŒ…æ‹¬è£åˆ¤ç³»ç»Ÿä¿¡æ¯çš„ä¼ è¾“ã€ACæ¿é—´ä¿¡æ¯çš„äº¤äº’ï¼‰
  * @Note:       
  * @Others: 
 **/
@@ -33,17 +33,17 @@ motor_msg_t yaw_motor_msg = {0};
   * @author         
   * @param[in] 
   * @retval	
-  * @note    Ä¬ÈÏµç»úµÄcan·¢ËÍÆµÂÊÎª1KHZ       
+  * @note    é»˜è®¤ç”µæœºçš„canå‘é€é¢‘ç‡ä¸º1KHZ       
   */ 
 
 static void yaw_motor_msg_process(motor_msg_t *m, uint8_t aData[])
 {
 	int16_t i;
-	m->encoder.filter_rate_sum = 0;//½øÈëÇåÁã
+	m->encoder.filter_rate_sum = 0;//è¿›å…¥æ¸…é›¶
 	m->encoder.last_raw_value = m->encoder.raw_value; 
-	if(m->encoder.start_flag==0)//ÉÏµç²É¼¯Ô­Ê¼½Ç¶È
+	if(m->encoder.start_flag==0)//ä¸Šç”µé‡‡é›†åŸå§‹è§’åº¦
 	{
-		m->encoder.ecd_bias = (aData[0]<<8)|aData[1];//³õÊ¼Î»ÖÃ
+		m->encoder.ecd_bias = (aData[0]<<8)|aData[1];//åˆå§‹ä½ç½®
 		m->encoder.last_raw_value = (aData[0]<<8)|aData[1];
 		m->encoder.raw_value = m->encoder.last_raw_value;
 		m->encoder.start_flag = 1;
@@ -54,8 +54,8 @@ static void yaw_motor_msg_process(motor_msg_t *m, uint8_t aData[])
 	}
 	
 	m->encoder.diff = m->encoder.raw_value - m->encoder.last_raw_value;
-	if(m->encoder.diff < -6000)//Á½´Î±àÂëÆ÷µÄ·´À¡Öµ²î±ğÌ«´ó£¬±íÊ¾È¦Êı·¢ÉúÁË¸Ä±ä                         
-	{                          //7500¸ù¾İ¿ØÖÆÖÜÆÚ¿Éµ÷£¬¼´±£Ö¤Ò»¸ö¿ØÖÆÖÜÆÚÄÚ ×ª×Ó»úĞµ½Ç¶È±ä»¯Ğ¡ÓÚ8191-7500=691µÄÁ¿ 
+	if(m->encoder.diff < -6000)//ä¸¤æ¬¡ç¼–ç å™¨çš„åé¦ˆå€¼å·®åˆ«å¤ªå¤§ï¼Œè¡¨ç¤ºåœˆæ•°å‘ç”Ÿäº†æ”¹å˜                         
+	{                          //7500æ ¹æ®æ§åˆ¶å‘¨æœŸå¯è°ƒï¼Œå³ä¿è¯ä¸€ä¸ªæ§åˆ¶å‘¨æœŸå†… è½¬å­æœºæ¢°è§’åº¦å˜åŒ–å°äº8191-7500=691çš„é‡ 
 		m->encoder.round_cnt ++;
 		m->encoder.ecd_raw_rate = m->encoder.diff + 8192;
 	}
@@ -68,7 +68,7 @@ static void yaw_motor_msg_process(motor_msg_t *m, uint8_t aData[])
 	{
 		m->encoder.ecd_raw_rate = m->encoder.diff;
 	}
-	//¼ÆËãµÃµ½½Ç¶ÈÖµ£¬·¶Î§Õı¸ºÎŞÇî´ó
+	//è®¡ç®—å¾—åˆ°è§’åº¦å€¼ï¼ŒèŒƒå›´æ­£è´Ÿæ— ç©·å¤§
 	m->encoder.ecd_angle = (float)(m->encoder.raw_value - m->encoder.ecd_bias)*360/8192  \
 								   + m->encoder.round_cnt * 360;
 	
@@ -77,13 +77,13 @@ static void yaw_motor_msg_process(motor_msg_t *m, uint8_t aData[])
 	{
 		m->encoder.buf_count = 0;
 	}
-	//¼ÆËãËÙ¶ÈÆ½¾ùÖµ
+	//è®¡ç®—é€Ÿåº¦å¹³å‡å€¼
 	for(i = 0;i < RATE_BUF_SIZE; i++)
 	{
 		m->encoder.filter_rate_sum += m->encoder.rate_buf[i];
 	}
 	m->encoder.filter_rate = (int32_t)(m->encoder.filter_rate_sum/RATE_BUF_SIZE);	
-	/*---------------------·Ç±àÂëÆ÷Êı¾İ------------------------*/
+	/*---------------------éç¼–ç å™¨æ•°æ®------------------------*/
 	m->speed_rpm = (uint16_t)(aData[2] << 8 | aData[3]);     
 	m->given_current = (uint16_t)(aData[4] << 8 | aData[5]); 
 	m->temperate = aData[6];          
@@ -142,7 +142,7 @@ void send_shoot_17mm_data(robot_status_t *robot_status)
 		can2_tx_data[4] = (uint8_t)(30>>8);//
     can2_tx_data[5] = (uint8_t)(30);
     can2_tx_data[6] = (uint8_t)(power_heat.shooter_17mm_1_barrel_heat>>8);
-    can2_tx_data[7] = (uint8_t)(power_heat.shooter_17mm_1_barrel_heat);//¸ÄÎªÇ¹¿ÚÈÈÁ¿
+    can2_tx_data[7] = (uint8_t)(power_heat.shooter_17mm_1_barrel_heat);//æ”¹ä¸ºæªå£çƒ­é‡
 	HAL_CAN_AddTxMessage(&hcan2, &can2_tx_header, can2_tx_data, (uint32_t *) CAN_TX_MAILBOX0);
 }
 void send_shoot_judge_data(void)  
@@ -152,7 +152,7 @@ void send_shoot_judge_data(void)
     can2_tx_header.RTR = CAN_RTR_DATA;
     can2_tx_header.DLC = 0x08;
 
-    can2_tx_data[0] = (uint8_t)(((uint16_t)(shoot_data.initial_speed))>>8);     //±£ÁôÁ½Î»Ğ¡Êı
+    can2_tx_data[0] = (uint8_t)(((uint16_t)(shoot_data.initial_speed))>>8);     //ä¿ç•™ä¸¤ä½å°æ•°
     can2_tx_data[1] = (uint8_t)((uint16_t)(shoot_data.initial_speed));
     can2_tx_data[2] = (uint8_t)(robot_hurt.HP_deduction_reason);
     can2_tx_data[3] = (uint8_t)(robot_status.power_management_shooter_output);

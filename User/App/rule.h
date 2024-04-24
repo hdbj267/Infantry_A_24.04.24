@@ -6,18 +6,18 @@
 
 typedef struct
 {
-    uint16_t Pre_HP;                  //ÉÏÒ»ÑªÁ¿
-    uint16_t hurt_HP;                 //¿ÛÑªÁ¿
-    uint16_t allow_power;             //¿ØÖÆ°åµÄãĞÖµ¹¦ÂÊ
-	uint8_t Armor_Huar_flag;          //×°¼×ÉËº¦±êÖ¾
-    uint8_t Off_Line_flag;            //µôÏß±êÖ¾
-	uint8_t Excess_Speed_shoot_flag;  //³¬ÉäËÙ±êÖ¾
-    uint8_t Excess_Heat_flag;         //³¬ÈÈÁ¿±êÖ¾
-    uint8_t Over_Power_flag;          //³¬¹¦ÂÊ±êÖ¾
-	uint8_t Armor_BUMP_flag;          //×°¼××²»÷±êÖ¾
+    uint16_t Pre_HP;                  //ä¸Šä¸€è¡€é‡
+    uint16_t hurt_HP;                 //æ‰£è¡€é‡
+    uint16_t allow_power;             //æ§åˆ¶æ¿çš„é˜ˆå€¼åŠŸç‡
+	uint8_t Armor_Huar_flag;          //è£…ç”²ä¼¤å®³æ ‡å¿—
+    uint8_t Off_Line_flag;            //æ‰çº¿æ ‡å¿—
+	uint8_t Excess_Speed_shoot_flag;  //è¶…å°„é€Ÿæ ‡å¿—
+    uint8_t Excess_Heat_flag;         //è¶…çƒ­é‡æ ‡å¿—
+    uint8_t Over_Power_flag;          //è¶…åŠŸç‡æ ‡å¿—
+	uint8_t Armor_BUMP_flag;          //è£…ç”²æ’å‡»æ ‡å¿—
 
-    float over_power_P;               //³¬¹¦°Ù·Ö±È
-    uint16_t over_power_part;         //³¬¹¦²¿·Ö
+    float over_power_P;               //è¶…åŠŸç™¾åˆ†æ¯”
+    uint16_t over_power_part;         //è¶…åŠŸéƒ¨åˆ†
 
 }robot_t;
 

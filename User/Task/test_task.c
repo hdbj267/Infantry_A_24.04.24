@@ -15,12 +15,12 @@
 #define operator_ID Robot_ID_Red_Infantry4
 
 
-uint8_t UI_Seq=0;	//°üĞòºÅ
+uint8_t UI_Seq=0;	//åŒ…åºå·
 extern  robot_status_t robot_status;
 
 
 /**
-  * @brief  Í¨¹ı×Ô¼ºµÄID£¬·µ»Ø¶ÔÓ¦²Ù×÷ÊÖ¿Í»§¶ËID
+  * @brief  é€šè¿‡è‡ªå·±çš„IDï¼Œè¿”å›å¯¹åº”æ“ä½œæ‰‹å®¢æˆ·ç«¯ID
   * @param  void
   * @retval 
   * @attention  
@@ -28,11 +28,11 @@ extern  robot_status_t robot_status;
 //uint16_t	operator_ID;
 //int Operator_ID(void)
 //{
-//	if(robot_status.robot_id < 10)        //ºì·½
+//	if(robot_status.robot_id < 10)        //çº¢æ–¹
 //	{
 //		operator_ID = robot_status.robot_id + 0x0100 ;
 //	}
-//	else if (robot_status.robot_id > 10)  //À¶·½
+//	else if (robot_status.robot_id > 10)  //è“æ–¹
 //	{
 //		operator_ID = robot_status.robot_id + 0x0064 ;
 //	}
@@ -267,16 +267,16 @@ void UI_Char(ext_client_custom_character_t* string_data_struct, uint8_t name[3],
 }
 
 /*
-¿Í»§¶Ë»æÖÆÍ¼ĞÎ
+å®¢æˆ·ç«¯ç»˜åˆ¶å›¾å½¢
 
-ÊäÈë²ÎÊı
-				cnt	ÊäÈë¼¸¸öÍ¼Ïñ£¬1£¬2£¬5£¬7
-				...	graphic_data_struct_tÀàĞÍµÄÍ¼Æ¬ÀàĞÍ
+è¾“å…¥å‚æ•°
+				cnt	è¾“å…¥å‡ ä¸ªå›¾åƒï¼Œ1ï¼Œ2ï¼Œ5ï¼Œ7
+				...	graphic_data_struct_tç±»å‹çš„å›¾ç‰‡ç±»å‹
 */
 	uint8_t* client_Data;
 void UI_Graphic_ReFresh(int cnt,...)
 {
-	ext_Send_User_Data_t	ShowData;			//¿Í»§¶ËĞÅÏ¢
+	ext_Send_User_Data_t	ShowData;			//å®¢æˆ·ç«¯ä¿¡æ¯
 	graphic_data_struct_t graphic_data;
 
 	uint8_t CliendTxBuffer[SEND_MAX_LEN];
@@ -293,12 +293,12 @@ void UI_Graphic_ReFresh(int cnt,...)
 	CliendTxBuffer[2]=((6+cnt*15)>>8)&0x00ff;
 	CliendTxBuffer[3]=UI_Seq;
 	
-//	memcpy(CliendTxBuffer, &ShowData,LEN_HEADER-1);//Ğ´ÈëÖ¡Í·Êı¾İ							//¸Ãº¯Êı°Ñuint_8µ±uingt_16Ğ´Èë
-	Append_CRC8_Check_Sum(CliendTxBuffer, LEN_HEADER);//Ğ´ÈëÖ¡Í·CRC8Ğ£ÑéÂë
+//	memcpy(CliendTxBuffer, &ShowData,LEN_HEADER-1);//å†™å…¥å¸§å¤´æ•°æ®							//è¯¥å‡½æ•°æŠŠuint_8å½“uingt_16å†™å…¥
+	Append_CRC8_Check_Sum(CliendTxBuffer, LEN_HEADER);//å†™å…¥å¸§å¤´CRC8æ ¡éªŒç 
 	ShowData.CmdID = ROBOT_COMMUNICATION_ID;
 	
 	
-	switch(cnt+0x0100)//Êı¾İ¶ÎÄÚÈİµÄID
+	switch(cnt+0x0100)//æ•°æ®æ®µå†…å®¹çš„ID
 	{
 		case UI_Data_ID_Draw1:ShowData.dataFrameHeader.data_cmd_id=UI_Data_ID_Draw1;break;
 		case UI_Data_ID_Draw2:ShowData.dataFrameHeader.data_cmd_id=UI_Data_ID_Draw2;break;
@@ -308,10 +308,10 @@ void UI_Graphic_ReFresh(int cnt,...)
 	}
 	
 	
-	ShowData.dataFrameHeader.send_ID 	 = robot_status.robot_id ;//·¢ËÍÕßµÄID
-	ShowData.dataFrameHeader.receiver_ID = operator_ID;//¿Í»§¶ËµÄID£¬Ö»ÄÜÎª·¢ËÍÕß»úÆ÷ÈË¶ÔÓ¦µÄ¿Í»§¶Ë
+	ShowData.dataFrameHeader.send_ID 	 = robot_status.robot_id ;//å‘é€è€…çš„ID
+	ShowData.dataFrameHeader.receiver_ID = operator_ID;//å®¢æˆ·ç«¯çš„IDï¼Œåªèƒ½ä¸ºå‘é€è€…æœºå™¨äººå¯¹åº”çš„å®¢æˆ·ç«¯
 	
-	memcpy(CliendTxBuffer+LEN_HEADER, &ShowData.CmdID, LEN_CMDID+LEN_DATAFH);//Ğ´ÈëÊı¾İ
+	memcpy(CliendTxBuffer+LEN_HEADER, &ShowData.CmdID, LEN_CMDID+LEN_DATAFH);//å†™å…¥æ•°æ®
 	
 	for(int i=0;i<cnt;i++)
 	{
@@ -324,9 +324,9 @@ void UI_Graphic_ReFresh(int cnt,...)
 	}
 	
 	
-	Append_CRC16_Check_Sum(CliendTxBuffer,LEN_HEADER+LEN_CMDID+LEN_DATAFH+cnt*15+LEN_TAIL);//Ğ´ÈëÊı¾İ¶ÎCRC16Ö¡Î²Ğ£ÑéÂë	
+	Append_CRC16_Check_Sum(CliendTxBuffer,LEN_HEADER+LEN_CMDID+LEN_DATAFH+cnt*15+LEN_TAIL);//å†™å…¥æ•°æ®æ®µCRC16å¸§å°¾æ ¡éªŒç 	
 
-	while(HAL_UART_Transmit(&huart3, CliendTxBuffer, LEN_HEADER+LEN_CMDID+LEN_DATAFH+cnt*15+LEN_TAIL, 1000)!=HAL_OK);      //·¢Êı¾İ  5+2+6+Êı¾İ+2
+	while(HAL_UART_Transmit(&huart3, CliendTxBuffer, LEN_HEADER+LEN_CMDID+LEN_DATAFH+cnt*15+LEN_TAIL, 1000)!=HAL_OK);      //å‘æ•°æ®  5+2+6+æ•°æ®+2
 	
 	UI_Seq++;
 	
@@ -337,10 +337,10 @@ void UI_Graphic_ReFresh(int cnt,...)
 }
 
 /*
-¿Í»§¶Ë»æÖÆ×Ö·ûÍ¼ĞÎ
+å®¢æˆ·ç«¯ç»˜åˆ¶å­—ç¬¦å›¾å½¢
 
-ÊäÈë²ÎÊı
-				string_data_struct_t_	×Ö·û´®Êı¾İ½á¹¹Ìå
+è¾“å…¥å‚æ•°
+				string_data_struct_t_	å­—ç¬¦ä¸²æ•°æ®ç»“æ„ä½“
 */
 	ext_Send_User_Data_t	ShowData;
 	uint8_t CliendTxBuffer[SEND_MAX_LEN];
@@ -358,13 +358,13 @@ void UI_Char_ReFresh(ext_client_custom_character_t* string_data_struct)
 	CliendTxBuffer[2]=((6+45)>>8)&0x00ff;
 	CliendTxBuffer[3]=UI_Seq;
 
-	Append_CRC8_Check_Sum(CliendTxBuffer, LEN_HEADER);//Ğ´ÈëÖ¡Í·CRC8Ğ£ÑéÂë
+	Append_CRC8_Check_Sum(CliendTxBuffer, LEN_HEADER);//å†™å…¥å¸§å¤´CRC8æ ¡éªŒç 
 	ShowData.CmdID = ROBOT_COMMUNICATION_ID;
 	ShowData.dataFrameHeader.data_cmd_id=UI_Data_ID_DrawChar;
-	ShowData.dataFrameHeader.send_ID 	 = robot_status.robot_id ;//·¢ËÍÕßµÄID
-	ShowData.dataFrameHeader.receiver_ID = operator_ID;//¿Í»§¶ËµÄID£¬Ö»ÄÜÎª·¢ËÍÕß»úÆ÷ÈË¶ÔÓ¦µÄ¿Í»§¶Ë
+	ShowData.dataFrameHeader.send_ID 	 = robot_status.robot_id ;//å‘é€è€…çš„ID
+	ShowData.dataFrameHeader.receiver_ID = operator_ID;//å®¢æˆ·ç«¯çš„IDï¼Œåªèƒ½ä¸ºå‘é€è€…æœºå™¨äººå¯¹åº”çš„å®¢æˆ·ç«¯
 	
-	memcpy(CliendTxBuffer+LEN_HEADER, &ShowData.CmdID, LEN_CMDID+LEN_DATAFH);//Ğ´ÈëÊı¾İ
+	memcpy(CliendTxBuffer+LEN_HEADER, &ShowData.CmdID, LEN_CMDID+LEN_DATAFH);//å†™å…¥æ•°æ®
 	
 	string_data=(uint8_t*)string_data_struct;
 	for(int i=0;i<45;i++)
@@ -372,21 +372,21 @@ void UI_Char_ReFresh(ext_client_custom_character_t* string_data_struct)
 		CliendTxBuffer[LEN_HEADER+LEN_CMDID+LEN_DATAFH+i]=string_data[i];
 	}
 	
-	Append_CRC16_Check_Sum(CliendTxBuffer,LEN_HEADER+LEN_CMDID+LEN_DATAFH+45+LEN_TAIL);//Ğ´ÈëÊı¾İ¶ÎCRC16Ö¡Î²Ğ£ÑéÂë	
+	Append_CRC16_Check_Sum(CliendTxBuffer,LEN_HEADER+LEN_CMDID+LEN_DATAFH+45+LEN_TAIL);//å†™å…¥æ•°æ®æ®µCRC16å¸§å°¾æ ¡éªŒç 	
 
-	while(HAL_UART_Transmit(&huart3, CliendTxBuffer, LEN_HEADER+LEN_CMDID+LEN_DATAFH+45+LEN_TAIL, 1000)!=HAL_OK);      //·¢Êı¾İ  5+2+6+Êı¾İ+2
+	while(HAL_UART_Transmit(&huart3, CliendTxBuffer, LEN_HEADER+LEN_CMDID+LEN_DATAFH+45+LEN_TAIL, 1000)!=HAL_OK);      //å‘æ•°æ®  5+2+6+æ•°æ®+2
 	
 	UI_Seq++;
 }
 
 
 /*
-É¾³ıÍ¼Æ¬
+åˆ é™¤å›¾ç‰‡
 
-ÊäÈë²ÎÊı
+è¾“å…¥å‚æ•°
 				
-				operate								0£º¿Õ²Ù×÷£¬1£ºÉ¾³ıÍ¼²ã£¬2£ºÉ¾³ıÈ«²¿
-				layer									Í¼²ã
+				operate								0ï¼šç©ºæ“ä½œï¼Œ1ï¼šåˆ é™¤å›¾å±‚ï¼Œ2ï¼šåˆ é™¤å…¨éƒ¨
+				layer									å›¾å±‚
 */
 
 void UI_Del(uint8_t operate,uint8_t layer)
@@ -398,24 +398,24 @@ void UI_Del(uint8_t operate,uint8_t layer)
 //	ShowData.txFrameHeader.seq = UI_Seq;
 	CliendTxBuffer[0]=UI_SOF;CliendTxBuffer[1]=(8)&0x00ff;CliendTxBuffer[2]=((8)>>8)&0x00ff;CliendTxBuffer[3]=UI_Seq;
 	
-	Append_CRC8_Check_Sum(CliendTxBuffer, LEN_HEADER);//Ğ´ÈëÖ¡Í·CRC8Ğ£ÑéÂë
+	Append_CRC8_Check_Sum(CliendTxBuffer, LEN_HEADER);//å†™å…¥å¸§å¤´CRC8æ ¡éªŒç 
 	ShowData.CmdID = ROBOT_COMMUNICATION_ID;
 	
 	
 	ShowData.dataFrameHeader.data_cmd_id=UI_Data_ID_Del;
-	ShowData.dataFrameHeader.send_ID 	 = robot_status.robot_id;//·¢ËÍÕßµÄID
-	ShowData.dataFrameHeader.receiver_ID = operator_ID;//¿Í»§¶ËµÄID£¬Ö»ÄÜÎª·¢ËÍÕß»úÆ÷ÈË¶ÔÓ¦µÄ¿Í»§¶Ë
+	ShowData.dataFrameHeader.send_ID 	 = robot_status.robot_id;//å‘é€è€…çš„ID
+	ShowData.dataFrameHeader.receiver_ID = operator_ID;//å®¢æˆ·ç«¯çš„IDï¼Œåªèƒ½ä¸ºå‘é€è€…æœºå™¨äººå¯¹åº”çš„å®¢æˆ·ç«¯
 	
-	memcpy(CliendTxBuffer+LEN_HEADER, &ShowData.CmdID, LEN_CMDID+LEN_DATAFH);//Ğ´ÈëÊı¾İ
+	memcpy(CliendTxBuffer+LEN_HEADER, &ShowData.CmdID, LEN_CMDID+LEN_DATAFH);//å†™å…¥æ•°æ®
 	
 	CliendTxBuffer[LEN_HEADER+LEN_CMDID+LEN_DATAFH]=operate;
 	CliendTxBuffer[LEN_HEADER+LEN_CMDID+LEN_DATAFH+1]=layer;
 	
 	
 	
-	Append_CRC16_Check_Sum(CliendTxBuffer,LEN_HEADER+LEN_CMDID+LEN_DATAFH+2+LEN_TAIL);//Ğ´ÈëÊı¾İ¶ÎCRC16Ö¡Î²Ğ£ÑéÂë
+	Append_CRC16_Check_Sum(CliendTxBuffer,LEN_HEADER+LEN_CMDID+LEN_DATAFH+2+LEN_TAIL);//å†™å…¥æ•°æ®æ®µCRC16å¸§å°¾æ ¡éªŒç 
 	
-	while(HAL_UART_Transmit(&huart3, CliendTxBuffer,LEN_HEADER+LEN_CMDID+LEN_DATAFH+2+LEN_TAIL, 1000)!=HAL_OK);      //·¢Êı¾İ  5+2+6+Êı¾İ+2
+	while(HAL_UART_Transmit(&huart3, CliendTxBuffer,LEN_HEADER+LEN_CMDID+LEN_DATAFH+2+LEN_TAIL, 1000)!=HAL_OK);      //å‘æ•°æ®  5+2+6+æ•°æ®+2
 	
 	UI_Seq++;
 }
@@ -463,7 +463,7 @@ void test_task(void *argument)
     {
 	//		a = Operator_ID();
 		UI_PushUp_Counter++;
-		//ÊÓ¾õ±êÖ¾Î»
+		//è§†è§‰æ ‡å¿—ä½
 		if(UI_PushUp_Counter % 101 == 0)
 		{
 			UI_Char(&C1,"201", UI_Graph_Add, 0, UI_Color_Green,  22, 10, 3,  100, 800, "vision OFF");
@@ -476,49 +476,49 @@ void test_task(void *argument)
 			UI_Char_ReFresh(&C2);
 			continue;
 		}
-			//ÖĞÑë±ê³ß
-		if(UI_PushUp_Counter % 201 == 0) //¾²Ì¬UIÔ¤»æÖÆ ÖĞÑë±ê³ß1
+			//ä¸­å¤®æ ‡å°º
+		if(UI_PushUp_Counter % 201 == 0) //é™æ€UIé¢„ç»˜åˆ¶ ä¸­å¤®æ ‡å°º1
 		{
-			UI_Line(&G10, "001", UI_Graph_Add, 0, UI_Color_Green, 1,  840,   y01,  920,   y01); //µÚÒ»ĞĞ×óºáÏß
-			UI_Line(&G11, "002", UI_Graph_Add, 0, UI_Color_Green, 1,  950,   y01,  970,   y01); //µÚÒ»ĞĞÊ®×Öºá
+			UI_Line(&G10, "001", UI_Graph_Add, 0, UI_Color_Green, 1,  840,   y01,  920,   y01); //ç¬¬ä¸€è¡Œå·¦æ¨ªçº¿
+			UI_Line(&G11, "002", UI_Graph_Add, 0, UI_Color_Green, 1,  950,   y01,  970,   y01); //ç¬¬ä¸€è¡Œåå­—æ¨ª
 			UI_Graphic_ReFresh(2,G10,G11);
 			continue;
 		}
-		if(UI_PushUp_Counter % 251 == 0) //¾²Ì¬UIÔ¤»æÖÆ ÖĞÑë±ê³ß1
+		if(UI_PushUp_Counter % 251 == 0) //é™æ€UIé¢„ç»˜åˆ¶ ä¸­å¤®æ ‡å°º1
 		{
-			UI_Line(&G12, "003", UI_Graph_Add, 0, UI_Color_Green, 1, 1000,   y01, 1080,   y01); //µÚÒ»ĞĞÓÒºáÏß
-			UI_Line(&G13, "004", UI_Graph_Add, 0, UI_Color_Green, 1,  960,y01-10,  960,y01+10); //µÚÒ»ĞĞÊ®×ÖÊú
+			UI_Line(&G12, "003", UI_Graph_Add, 0, UI_Color_Green, 1, 1000,   y01, 1080,   y01); //ç¬¬ä¸€è¡Œå³æ¨ªçº¿
+			UI_Line(&G13, "004", UI_Graph_Add, 0, UI_Color_Green, 1,  960,y01-10,  960,y01+10); //ç¬¬ä¸€è¡Œåå­—ç«–
 			UI_Graphic_ReFresh(2,G12,G13);
 			continue;
 		}
-				if(UI_PushUp_Counter % 301 == 0) //¾²Ì¬UIÔ¤»æÖÆ ÖĞÑë±ê³ß1
+				if(UI_PushUp_Counter % 301 == 0) //é™æ€UIé¢„ç»˜åˆ¶ ä¸­å¤®æ ‡å°º1
 		{
-			UI_Line(&G14, "005", UI_Graph_Add, 0, UI_Color_Green, 1,  870,   y02,  930,   y02); //µÚ¶şĞĞ×óºáÏß
-			UI_Line(&G15, "006", UI_Graph_Add, 0, UI_Color_Green, 5,  959,   y02,  960,   y02); //µÚ¶şĞĞÖĞĞÄµã
+			UI_Line(&G14, "005", UI_Graph_Add, 0, UI_Color_Green, 1,  870,   y02,  930,   y02); //ç¬¬äºŒè¡Œå·¦æ¨ªçº¿
+			UI_Line(&G15, "006", UI_Graph_Add, 0, UI_Color_Green, 5,  959,   y02,  960,   y02); //ç¬¬äºŒè¡Œä¸­å¿ƒç‚¹
 			UI_Graphic_ReFresh(2,G14,G15);
 			continue;
 		}
-		if(UI_PushUp_Counter % 351 == 0) //¾²Ì¬UIÔ¤»æÖÆ ÖĞÑë±ê³ß1
+		if(UI_PushUp_Counter % 351 == 0) //é™æ€UIé¢„ç»˜åˆ¶ ä¸­å¤®æ ‡å°º1
 		{
-			UI_Line(&G16, "007", UI_Graph_Add, 0, UI_Color_Green, 1,  990,   y02, 1050,   y02); //µÚ¶şĞĞÓÒºáÏß
+			UI_Line(&G16, "007", UI_Graph_Add, 0, UI_Color_Green, 1,  990,   y02, 1050,   y02); //ç¬¬äºŒè¡Œå³æ¨ªçº¿
 			UI_Graphic_ReFresh(1,G16);
 			continue;
 		}
-		if(UI_PushUp_Counter % 401 == 0) //¾²Ì¬UIÔ¤»æÖÆ Ğ¡ÍÓÂİÔ¤¾¯Ïß
+		if(UI_PushUp_Counter % 401 == 0) //é™æ€UIé¢„ç»˜åˆ¶ å°é™€èºé¢„è­¦çº¿
 		{
 			UI_Line(&G20, "101", UI_Graph_Add, 1, UI_Color_Yellow, 2,  630,   30,  780,  100);
 			UI_Line(&G21, "102", UI_Graph_Add, 1, UI_Color_Yellow, 2,  780,  100,  930,  100);
 			UI_Graphic_ReFresh(2,G20,G21);
 			continue;
 		}
-		if(UI_PushUp_Counter % 451 == 0) //¾²Ì¬UIÔ¤»æÖÆ Ğ¡ÍÓÂİÔ¤¾¯Ïß
+		if(UI_PushUp_Counter % 451 == 0) //é™æ€UIé¢„ç»˜åˆ¶ å°é™€èºé¢„è­¦çº¿
 		{
 			UI_Line(&G22, "103", UI_Graph_Add, 1, UI_Color_Yellow, 2,  990,  100, 1140,  100);
 			UI_Line(&G23, "104", UI_Graph_Add, 1, UI_Color_Yellow, 2, 1140,  100, 1290,   30);
 			UI_Graphic_ReFresh(2,G22,G23);
 			continue;
 		}
-		if(UI_PushUp_Counter % 501 == 0) //¾²Ì¬UIÔ¤»æÖÆ Ğ¡ÍÓÂİÔ¤¾¯Ïß
+		if(UI_PushUp_Counter % 501 == 0) //é™æ€UIé¢„ç»˜åˆ¶ å°é™€èºé¢„è­¦çº¿
 		{
 			UI_Line(&G24, "105", UI_Graph_Add, 1, UI_Color_Yellow, 5,  959,  100,  960,  100);
 			UI_Graphic_ReFresh(1,G24);

@@ -4,7 +4,7 @@
 #include "main.h"
 
 #include "stm32f4xx_hal.h"
-/*****************************ÉèÖÃÊı¾İÀàĞÍ*****************************/
+/*****************************è®¾ç½®æ•°æ®ç±»å‹*****************************/
 
 
 typedef char *pchar;
@@ -20,8 +20,8 @@ typedef unsigned char uint8;
 typedef unsigned int uint16;
 typedef unsigned long int uint32;
 /*****************************************
-¡¾¹¦ ÄÜ ¡¿:³õÊ¼»¯Òı½Å¶¨Òå
-¡¾Ëµ Ã÷ ¡¿:Ö±½ÓÔÚÕâÀï¸ÄIO¾Í¿ÉÒÔÁË*/
+ã€åŠŸ èƒ½ ã€‘:åˆå§‹åŒ–å¼•è„šå®šä¹‰
+ã€è¯´ æ˜ ã€‘:ç›´æ¥åœ¨è¿™é‡Œæ”¹IOå°±å¯ä»¥äº†*/
 /*----RST-----B10-----*/
 /*----DC-----B9-----*/
 /*----SCLK-----B3-----*/
@@ -37,7 +37,7 @@ typedef unsigned long int uint32;
 
 #define LED_DCH        PBout(9)=1
 #define LED_DCL        PBout(9)=0
-//²âÊÔf429
+//æµ‹è¯•f429
 //#define LED_SCLH       PBout(10)=1
 //#define LED_SCLL       PBout(10)=0
 
@@ -57,11 +57,11 @@ typedef unsigned long int uint32;
 //#define CS_PIN PTC14
 
 //#define INIT 0
-//#define LED_SCL_Init  gpio_init(SCL_PIN,GPO,0) // Ê±ÖÓ³õÊ¼»¯¶¨Òå
-//#define LED_SDA_Init  gpio_init(SDA_PIN,GPO,0)//Êı¾İ¿ÚD1
-//#define LED_RST_Init  gpio_init(RST_PIN,GPO,0)//¸´Î»µÍÄÜµçÆ½
-//#define LED_DC_Init   gpio_init(DC_PIN,GPO,0)//Æ«ÖÃ³£µÍ
-//#define LED_CS_Init   gpio_init(CS_PIN,GPO,INIT)//Æ«ÖÃ³£µÍ
+//#define LED_SCL_Init  gpio_init(SCL_PIN,GPO,0) // æ—¶é’Ÿåˆå§‹åŒ–å®šä¹‰
+//#define LED_SDA_Init  gpio_init(SDA_PIN,GPO,0)//æ•°æ®å£D1
+//#define LED_RST_Init  gpio_init(RST_PIN,GPO,0)//å¤ä½ä½èƒ½ç”µå¹³
+//#define LED_DC_Init   gpio_init(DC_PIN,GPO,0)//åç½®å¸¸ä½
+//#define LED_CS_Init   gpio_init(CS_PIN,GPO,INIT)//åç½®å¸¸ä½
 
 
 //#define LED_SCLH       gpio_set (SCL_PIN	, 1)
@@ -79,11 +79,11 @@ typedef unsigned long int uint32;
 
 /************************************************/
 
-void  LEDPIN_Init(void);   //LED¿ØÖÆÒı½Å³õÊ¼»¯
+void  LEDPIN_Init(void);   //LEDæ§åˆ¶å¼•è„šåˆå§‹åŒ–
 void LED_Init(void);
 void LED_CLS(void);
-void LED_Set_Pos(uint8 x, uint8 y);//ÉèÖÃ×ø±êº¯Êı
-void LED_WrDat(uint8 data);   //Ğ´Êı¾İº¯Êı
+void LED_Set_Pos(uint8 x, uint8 y);//è®¾ç½®åæ ‡å‡½æ•°
+void LED_WrDat(uint8 data);   //å†™æ•°æ®å‡½æ•°
 void LED_P6x8Char(uint8 x,uint8 y,uint8 ch);
 void LED_P6x8Str(uint8 x,uint8 y,uint8 ch[]);
 void LED_P8x16Str(uint8 x,uint8 y,uint8 ch[]);
@@ -102,7 +102,7 @@ void LED_Cursor(uint8 cursor_column, uint8 cursor_row);
 void LED_PrintLine(void);
  
  
-void OLED_Set_Pos(unsigned char x, unsigned char y) ;//Íâ²¿£¬Í¼ÏñÏÔÊ¾ÓÃ
+void OLED_Set_Pos(unsigned char x, unsigned char y) ;//å¤–éƒ¨ï¼Œå›¾åƒæ˜¾ç¤ºç”¨
  
 void img_show(void);
 void team_name(void);

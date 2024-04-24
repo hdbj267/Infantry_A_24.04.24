@@ -2,10 +2,10 @@
  * @Copyright(C),
  * @FileName:.c
  * @Author: HongYuJia 
- * @Teammate£º
+ * @Teammateï¼š
  * @Version: V3.0
  * @Date:2021.4.13
- * @Description:   ÈË»ú½»»¥OLEDÏÔÊ¾
+ * @Description:   äººæœºäº¤äº’OLEDæ˜¾ç¤º
  * @Note:       
  * @Others: 
 **/
@@ -41,16 +41,16 @@ void get_rc_analoy_key_value(rc_analog_key_t *analoy_key, RC_ctrl_t *rc_ctrl_dat
 	{
 		return;
 	}
-	if(rc_ctrl_data->rc.ch3>ANALOY_KEY_THRE_VALUE)  analoy_key->key_up = 1;//ÉÏ
+	if(rc_ctrl_data->rc.ch3>ANALOY_KEY_THRE_VALUE)  analoy_key->key_up = 1;//ä¸Š
 	else analoy_key->key_up = 0;
 	
-	if(rc_ctrl_data->rc.ch3<(-ANALOY_KEY_THRE_VALUE))  analoy_key->key_down = 1;//ÏÂ
+	if(rc_ctrl_data->rc.ch3<(-ANALOY_KEY_THRE_VALUE))  analoy_key->key_down = 1;//ä¸‹
 	else analoy_key->key_down = 0;
 	
-	if(rc_ctrl_data->rc.ch2>ANALOY_KEY_THRE_VALUE)  analoy_key->key_back = 1;//ÓÒ
+	if(rc_ctrl_data->rc.ch2>ANALOY_KEY_THRE_VALUE)  analoy_key->key_back = 1;//å³
 	else analoy_key->key_back = 0;
 	
-	if(rc_ctrl_data->rc.ch2<(-ANALOY_KEY_THRE_VALUE))  analoy_key->key_ok = 1;//×ó
+	if(rc_ctrl_data->rc.ch2<(-ANALOY_KEY_THRE_VALUE))  analoy_key->key_ok = 1;//å·¦
 	else analoy_key->key_ok = 0;
 }
 void rc_analoy_key_init(void)
@@ -61,7 +61,7 @@ void rc_analoy_key_init(void)
 	rc_analog_key.key_up = 0;
 	rc_analog_key.rc_ctrl_data_point = get_rc_data_point();
 }
-/****************************OLEDµ÷ÊÔËùÓÃ±äÁ¿******************************/
+/****************************OLEDè°ƒè¯•æ‰€ç”¨å˜é‡******************************/
 uint8_t key_num = 0;
 #define     oled_key_release    0
 #define     oled_key_up         1
@@ -90,7 +90,7 @@ void Motor_message()
 		
 		if(key_scanf()==oled_key_left)
 		{
-			while(key_scanf());	//µÈ´ı°´¼üËÉ¿ª
+			while(key_scanf());	//ç­‰å¾…æŒ‰é”®æ¾å¼€
 			break;
 		}
 		osDelay(100);
@@ -116,7 +116,7 @@ void Robot_message(void)
 		LED_PrintValueC(54,6, robot_hurt.armor_id );
 		if(key_scanf()==oled_key_left)
 		{
-			while(key_scanf());	//µÈ´ı°´¼üËÉ¿ª
+			while(key_scanf());	//ç­‰å¾…æŒ‰é”®æ¾å¼€
 			break;
 		}
 		osDelay(100);
@@ -134,17 +134,17 @@ void shoot_message(void)
 		LED_PrintValueI(50,2,shoot_data.launching_frequency);
 		LED_P6x8Str(3,3,(uint8_t *)"speed:");
 		LED_PrintValueF(50,3,shoot_data.initial_speed,2);
-		LED_P6x8Str(3,4,(uint8_t *)"heat17:");	// 17mm Ç¹¿ÚÈÈÁ¿
+		LED_P6x8Str(3,4,(uint8_t *)"heat17:");	// 17mm æªå£çƒ­é‡
 //		LED_PrintValueI(50,4,power_heat.shooter_id1_17mm_cooling_heat);
 //		LED_P6x8Str(3,5,(uint8_t *)"V_lim:");
 //		LED_PrintValueI(50,5,robot_status.shooter_id1_17mm_speed_limit);
 //		LED_P6x8Str(3,6,(uint8_t *)"H_lim:");
 //		LED_PrintValueI(50,6,robot_status.shooter_id1_17mm_cooling_limit);
 //		LED_P6x8Str(3,7,(uint8_t *)"count:");	
-//		LED_PrintValueI(50,7,bullets_remaining.shootnum);	//Í³¼Æ·¢µ¯Á¿,Ã¿´¥·¢Ò»´ÎÔòÈÏÎª·¢ÉäÁËÒ»¿Å
+//		LED_PrintValueI(50,7,bullets_remaining.shootnum);	//ç»Ÿè®¡å‘å¼¹é‡,æ¯è§¦å‘ä¸€æ¬¡åˆ™è®¤ä¸ºå‘å°„äº†ä¸€é¢—
 		if(key_scanf()==oled_key_left)
 		{
-			while(key_scanf());	//µÈ´ı°´¼üËÉ¿ª
+			while(key_scanf());	//ç­‰å¾…æŒ‰é”®æ¾å¼€
 			break;
 		}
 		osDelay(100);
@@ -156,27 +156,27 @@ void power_message(void)
 	while(1)
 	{
 		LED_P6x8Str(28,0,(uint8_t *)"power_message:");
-		LED_P6x8Str(3,1,(uint8_t *)"volt:");	// µ×ÅÌÊä³öµçÑ¹ µ¥Î» ºÁ·ü
+		LED_P6x8Str(3,1,(uint8_t *)"volt:");	// åº•ç›˜è¾“å‡ºç”µå‹ å•ä½ æ¯«ä¼
 		LED_PrintValueI(40,1,power_heat.chassis_voltage);
-		LED_P6x8Str(3,2,(uint8_t *)"curre:");	// µ×ÅÌÊä³öµçÁ÷ µ¥Î» ºÁ°²
+		LED_P6x8Str(3,2,(uint8_t *)"curre:");	// åº•ç›˜è¾“å‡ºç”µæµ å•ä½ æ¯«å®‰
 		LED_PrintValueI(50,2,power_heat.chassis_current);
-		LED_P6x8Str(3,3,(uint8_t *)"power:");	// µ×ÅÌÊä³ö¹¦ÂÊ µ¥Î» W Íß 
+		LED_P6x8Str(3,3,(uint8_t *)"power:");	// åº•ç›˜è¾“å‡ºåŠŸç‡ å•ä½ W ç“¦ 
 		LED_PrintValueF(50,3,power_heat.chassis_power,2);
-		LED_P6x8Str(3,4,(uint8_t *)"buff:");	// µ×ÅÌ¹¦ÂÊ»º³å µ¥Î» J ½¹¶ú ±¸×¢£º·ÉÆÂ¸ù¾İ¹æÔòÔö¼ÓÖÁ 250J
+		LED_P6x8Str(3,4,(uint8_t *)"buff:");	// åº•ç›˜åŠŸç‡ç¼“å†² å•ä½ J ç„¦è€³ å¤‡æ³¨ï¼šé£å¡æ ¹æ®è§„åˆ™å¢åŠ è‡³ 250J
 		LED_PrintValueI(40,4,power_heat.buffer_energy);
 		/*
-		// µ×ÅÌÊä³öµçÑ¹ µ¥Î» ºÁ·ü
-		// µ×ÅÌÊä³öµçÁ÷ µ¥Î» ºÁ°²
-		// µ×ÅÌÊä³ö¹¦ÂÊ µ¥Î» W Íß 
-		// µ×ÅÌ¹¦ÂÊ»º³å µ¥Î» J ½¹¶ú ±¸×¢£º·ÉÆÂ¸ù¾İ¹æÔòÔö¼ÓÖÁ 250J
-		// 17mm Ç¹¿ÚÈÈÁ¿
-		// 42mm Ç¹¿ÚÈÈÁ¿
+		// åº•ç›˜è¾“å‡ºç”µå‹ å•ä½ æ¯«ä¼
+		// åº•ç›˜è¾“å‡ºç”µæµ å•ä½ æ¯«å®‰
+		// åº•ç›˜è¾“å‡ºåŠŸç‡ å•ä½ W ç“¦ 
+		// åº•ç›˜åŠŸç‡ç¼“å†² å•ä½ J ç„¦è€³ å¤‡æ³¨ï¼šé£å¡æ ¹æ®è§„åˆ™å¢åŠ è‡³ 250J
+		// 17mm æªå£çƒ­é‡
+		// 42mm æªå£çƒ­é‡
 		*/
-		LED_P6x8Str(3,5,(uint8_t *)"C_Lim:");	// µ×ÅÌ¹¦ÂÊÏŞÖÆ
+		LED_P6x8Str(3,5,(uint8_t *)"C_Lim:");	// åº•ç›˜åŠŸç‡é™åˆ¶
 		LED_PrintValueI(40,5,robot_status.chassis_power_limit);
 		if(key_scanf()==oled_key_left)
 		{
-			while(key_scanf());	//µÈ´ı°´¼üËÉ¿ª
+			while(key_scanf());	//ç­‰å¾…æŒ‰é”®æ¾å¼€
 			break;
 		}
 		osDelay(100);  
@@ -201,7 +201,7 @@ void GYRO_ch23_message()
 		LED_PrintValueI(65,4,connect_data.can2_rc_ctrl.rc.ch3);
 		if(key_scanf()==oled_key_left)
 		{
-			while(key_scanf());	//µÈ´ı°´¼üËÉ¿ª
+			while(key_scanf());	//ç­‰å¾…æŒ‰é”®æ¾å¼€
 			break;
 		}
 		osDelay(100);
@@ -213,7 +213,7 @@ void Motor_test(void)
 	int16_t test_motor1_duty=0, test_motor2_duty=0, test_motor3_duty=0, test_motor4_duty=0;
 	int choose_num=1;
 	LED_Fill(0x00);
-	osThreadSuspend(chassis_task_Handler);//ÈÎÎñ¹ÒÆğ
+	osThreadSuspend(chassis_task_Handler);//ä»»åŠ¡æŒ‚èµ·
 	while(1)
 	{
 		LED_P6x8Char(3, choose_num, '*');
@@ -280,8 +280,8 @@ void Motor_test(void)
 		}
 		else if(key_scanf()==oled_key_center && choose_num==7)
 		{
-			while(key_scanf());	//µÈ´ı°´¼üËÉ¿ª
-			osThreadResume(chassis_task_Handler);//ÈÎÎñ»Ö¸´
+			while(key_scanf());	//ç­‰å¾…æŒ‰é”®æ¾å¼€
+			osThreadResume(chassis_task_Handler);//ä»»åŠ¡æ¢å¤
 			LED_Fill(0x00);
 			break;
 		}
@@ -294,10 +294,10 @@ void Motor_test(void)
 }
 char task_ch[400] = {0};
 /**
-  * @brief         Ö÷²Ëµ¥Ñ¡ÔñÖ¸ Ê¾£¬¿ØÖÆĞÇºÅ¼´Ö¸Ê¾±êµÄ Ìø¶¯  ÈË»ú½»»¥×Üº¯Êı   
+  * @brief         ä¸»èœå•é€‰æ‹©æŒ‡ ç¤ºï¼Œæ§åˆ¶æ˜Ÿå·å³æŒ‡ç¤ºæ ‡çš„ è·³åŠ¨  äººæœºäº¤äº’æ€»å‡½æ•°   
   * @author         
   * @param[in]      
-  * @retval		   ·µ»Ø¿Õ
+  * @retval		   è¿”å›ç©º
   * @note
   */
 
@@ -358,7 +358,7 @@ void GUI_interaction(void)
 void GUI_task(void *argument)
 {
 	vTaskDelay(GUI_TASK_INIT_TIME);
-	LED_Init(); // OLEDÆÁÄ»³õÊ¼»¯
+	LED_Init(); // OLEDå±å¹•åˆå§‹åŒ–
 	rc_analoy_key_init();
 	while(1)
 	{

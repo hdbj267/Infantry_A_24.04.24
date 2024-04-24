@@ -5,12 +5,12 @@
 #include "stm32f4xx_hal_can.h"
 #include "struct_typedef.h"
 
-#define RATE_BUF_SIZE 6  //电机速度滑动滤波窗口大小
+#define RATE_BUF_SIZE 6  //鐢垫満閫熷害婊戝姩婊ゆ尝绐楀彛澶у皬
 #define CHASSIS_CAN hcan1
 
 typedef struct
 {
-	struct //匿名结构体定义结构体变量
+	struct //鍖垮悕缁撴瀯浣撳畾涔夌粨鏋勪綋鍙橀噺
 	{
 		int32_t raw_value;
 		int32_t yaw_turn_angle;
@@ -25,7 +25,7 @@ typedef struct
 		int32_t filter_rate_sum;
 		int32_t rate_buf[RATE_BUF_SIZE];
 		float ecd_angle;
-	}encoder;//定义一个名为Encoder的结构体       
+	}encoder;//瀹氫箟涓�涓悕涓篍ncoder鐨勭粨鏋勪綋       
 	
 	int32_t speed_rpm;
 	int32_t given_current;
@@ -52,7 +52,7 @@ void can1_message_progress( CAN_RxHeaderTypeDef *pHeader, uint8_t aData[]);
 
 void set_chassis_behaviour(int16_t cm1_iq, int16_t cm2_iq, int16_t cm3_iq, int16_t cm4_iq);
 void set_chassis_stop(void);
-void set_chassis_power(uint16_t temPower);    //底盘控制功率
+void set_chassis_power(uint16_t temPower);    //搴曠洏鎺у埗鍔熺巼
 
 motor_msg_t *get_cm1_msg_point(void);
 motor_msg_t *get_cm2_msg_point(void);
