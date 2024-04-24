@@ -454,7 +454,7 @@ void chassis_set_and_fdb_update(chassis_control_data_t *chassis, \
 #if 0
 	chassis->rotate_set = 0; //单独调试使用 不需要旋转量
 #endif	
-	/*新版限底盘功率应该是在这里改，思路：给四个轮子的转速设定值同时乘上一个比例值，
+	/*新版限底盘功率应该是在这里改，思路：给四个轮子的转速设定值同时乘上一个比例值，bnrssbstever
 	然后根据四个电机电流总和来计算底盘功率，然后一旦这个功率超过裁判系统允许的最大功率（即将超过），
 	就将这个比例系数减小，否则增加*/
 	
