@@ -27,15 +27,19 @@
 
 chassis_control_data_t chassis_control_data;
 chassis_pid_t chassis_pid;
-extern robot_status_t robot_status;
 float last_in=0;
 float T=0.001;
 float out;
-float CHASSIS_RC_CTRL_SPPED_MAX_FACT = 1.2;//最大跑动不超功率(?这里说的应该是等级最低级的情况，也就是功率为50的时候)
 
-//前馈控制，输入值为当前转速，输出为前馈量，在发给电机的电流值里加上能够提高系统响应 *hzp
 float forwardfeed(float in)
 {
+//	int k1=2000000000,k2=491200000;
+// out=k1*(in-last_in)/T-k2*in;
+//	if((in<70)&&(in>-70))
+//		out=0;
+//	else
+//	out=0.7*(0.05*in-79.36);
+	//last_in=in;
 	if(in<17)
 		out=0;
 	else if(in>=17&&in<103)
@@ -182,73 +186,62 @@ void rotate_motion_mode_process(chassis_control_data_t *chassis)
   * @retval			
   * @note           
   */
-uint16_t speed = 0,speed_max=700.0,SPORT_ROTATE_DECREASE=250,open_num,move_rotate_drop=360;
-float num1=0.9,speed1,num2=1.7,speed_min=550.0;
-uint8_t key_open_flag,last_key_open_flag,move_key_open_flag,trigger_key,last_key;
-float speed_factor1,speed_factor2,speed_factor3;
-float rotate_add_w=0.1,rotate_add_s=0.1,rotate_add_a=0.1,rotate_add_d=0.1;//这四个是移动小陀螺补偿系数
-
 void get_forward_back_value(chassis_control_data_t *chassis)
 {
-	
-//根据当前允许的最大功率来限制移动速度，旋转速度，小陀螺速度来达到限底盘功率的方案 *hzp
-//	int16_t speed = 0;
-	if(move_key_open_flag)
+	int16_t speed = 0;
+	if(chassis->connect->can2_rc_ctrl.mouse.key & CHASSIS_HIGH_SPEED_KEY)
 	{
-		speed1=0;;
-		speed = 0;
-//		if(speed==0)
-		move_key_open_flag=0;
-	}
-	speed_factor1=(robot_status.chassis_power_limit/100.0-1)/0.6*(1-speed_min/speed_max)+1.0;
-	if(chassis->connect->can2_rc_ctrl.mouse.key & ((CHASSIS_FORWARD_KEY)|(CHASSIS_BACK_KEY)|(CHASSIS_LEFT_KEY)|(CHASSIS_RIGHT_KEY)))//运动按键按下
-	{
-		speed1 += num1;
-		speed = speed1;
-//		if((chassis->connect->can2_rc_ctrl.work_mode == ROBOT_ROTATE_MOTION_MODE)&&(chassis->connect->can2_rc_ctrl.mouse.key & CHASSIS_HIGH_SPEED_KEY))
-//		{
-//			if(speed>(speed_max-100)*1.5)
-//			speed = speed>(speed_max-100)*1.5;
-//		}
-		if(chassis->connect->can2_rc_ctrl.mouse.key & CHASSIS_HIGH_SPEED_KEY)//加上shift的情况
-		{
-			if(speed>speed_max*2.0)
-			speed = speed_max*2.0;
-		}
 		
-		else if(chassis->connect->can2_rc_ctrl.work_mode == ROBOT_ROTATE_MOTION_MODE)//开启了小陀螺，移动要减速，不然容易超，减太多会不灵活
-		{
-			if(speed>speed_max-move_rotate_drop)
-			speed = speed_max-move_rotate_drop;
-		}
-			else if(speed>speed_max)//普通的运动
-				speed = speed_max;
-		key_open_flag=1;
+		speed = CHASSIS_MOUSE_CTRL_HIGH_SPPED;
+
 	}
-	else if(key_open_flag)//key_open_flag=1代表运动按键按下
+	else 
 	{
-		key_open_flag=0;
-		open_num=0;
+		speed = CHASSIS_MOUSE_CTRL_NORMAL_SPPED;
+
 	}
-	if(key_open_flag)//计时运动按键按下的时间
-	{
-		if(open_num<500)
-	open_num+=1;
-	}
-	if(key_open_flag==0&&last_key_open_flag==1)
-		move_key_open_flag=1;
-	last_key_open_flag=key_open_flag;
-	
-	
-	
+
 	if(chassis->connect->can2_rc_ctrl.control_mode == REMOTE_MODE)      
 	{
+		if ( RC_abs(chassis->connect->can2_rc_ctrl.rc.ch3) < 500 || RC_abs(chassis->connect->can2_rc_ctrl.rc.ch2) < 500)
+		{
+			if(chassis->connect->can2_rc_ctrl.rc.ch3 < 0 && chassis->connect->can2_rc_ctrl.rc.ch2 < 0)
+			{	
+				chassis->forward_back = -((chassis->connect->can2_rc_ctrl.rc.ch3 * chassis->connect->can2_rc_ctrl.rc.ch3)/500) *  \
+										CHASSIS_RC_CTRL_SPPED_MAX_FACT;
+				chassis->left_right = -((chassis->connect->can2_rc_ctrl.rc.ch2 *   chassis->connect->can2_rc_ctrl.rc.ch2)/500) *   \
+									CHASSIS_RC_CTRL_SPPED_MAX_FACT;
+			}
+			else if (chassis->connect->can2_rc_ctrl.rc.ch3 < 0 )
+			{
+				chassis->forward_back = -((chassis->connect->can2_rc_ctrl.rc.ch3 * chassis->connect->can2_rc_ctrl.rc.ch3)/500) *  \
+									CHASSIS_RC_CTRL_SPPED_MAX_FACT;
+				chassis->left_right = (chassis->connect->can2_rc_ctrl.rc.ch2 *   chassis->connect->can2_rc_ctrl.rc.ch2)/500 *   \
+								CHASSIS_RC_CTRL_SPPED_MAX_FACT;
+			}
+			else if ( chassis->connect->can2_rc_ctrl.rc.ch2 < 0 )
+			{
+				chassis->forward_back = (chassis->connect->can2_rc_ctrl.rc.ch3 * chassis->connect->can2_rc_ctrl.rc.ch3)/500 *  \
+									CHASSIS_RC_CTRL_SPPED_MAX_FACT;
+				chassis->left_right = -((chassis->connect->can2_rc_ctrl.rc.ch2 *   chassis->connect->can2_rc_ctrl.rc.ch2)/500) *   \
+								    CHASSIS_RC_CTRL_SPPED_MAX_FACT;
+			}
+			else 
+			{
+				chassis->forward_back = (chassis->connect->can2_rc_ctrl.rc.ch3 * chassis->connect->can2_rc_ctrl.rc.ch3)/500 *  \
+									CHASSIS_RC_CTRL_SPPED_MAX_FACT;
+				chassis->left_right = (chassis->connect->can2_rc_ctrl.rc.ch2 *   chassis->connect->can2_rc_ctrl.rc.ch2)/500 *   \
+								    CHASSIS_RC_CTRL_SPPED_MAX_FACT;
+			}
+		}
+		else 
+		{
 			chassis->forward_back = chassis->connect->can2_rc_ctrl.rc.ch3 *    \
 									CHASSIS_RC_CTRL_SPPED_MAX_FACT;
 			chassis->left_right = chassis->connect->can2_rc_ctrl.rc.ch2 *      \
 									CHASSIS_RC_CTRL_SPPED_MAX_FACT;
+		}
 	}
-	
 	else if(chassis->connect->can2_rc_ctrl.control_mode ==  KEY_MOUSE_MODE)   //鼠标键模式  *hyj
 	{
 		if(chassis->connect->can2_rc_ctrl.mouse.key & ROBOT_COMMON_MODE_KEY)       //普通底盘运动 V
@@ -298,24 +291,12 @@ void get_forward_back_value(chassis_control_data_t *chassis)
 			//forward and back
 			if(chassis->connect->can2_rc_ctrl.mouse.key & CHASSIS_FORWARD_KEY)//W
 			{
-				if(chassis->connect->can2_rc_ctrl.work_mode == ROBOT_ROTATE_MOTION_MODE)
-				{
-				chassis->forward_back = speed;
-				chassis->left_right = -speed*rotate_add_w;//移动小陀螺补偿，往前走补一点向左的分量，不然会走歪，不加的话会向右偏，下面类推
-				}
-				else
-				chassis->forward_back = speed;	
+				chassis->forward_back = speed*3/4;
 
 			}
 			else if(chassis->connect->can2_rc_ctrl.mouse.key & CHASSIS_BACK_KEY)//S
 			{
-				if(chassis->connect->can2_rc_ctrl.work_mode == ROBOT_ROTATE_MOTION_MODE)
-				{
-				chassis->forward_back = -speed;
-				chassis->left_right = speed*rotate_add_s;
-				}
-				else
-				chassis->forward_back = -speed;
+				chassis->forward_back = -speed*3/4;
 
 			}
 			else
@@ -325,34 +306,19 @@ void get_forward_back_value(chassis_control_data_t *chassis)
 			//left and right
 			if(chassis->connect->can2_rc_ctrl.mouse.key & CHASSIS_LEFT_KEY)//L
 			{
-				if(chassis->connect->can2_rc_ctrl.work_mode == ROBOT_ROTATE_MOTION_MODE)
-				{
-				chassis->left_right = -speed*0.7;//这里乘了0.7是因为往左右走，消耗的功率大于前后走，约束一下左右走的速度，不然容易超功率
-				chassis->forward_back = -speed*rotate_add_a;
-				}
-				else
-				chassis->left_right = -speed*0.7;
+				chassis->left_right = -speed*3/4;
 			}
 			else if(chassis->connect->can2_rc_ctrl.mouse.key & CHASSIS_RIGHT_KEY)//R
 			{
-				if(chassis->connect->can2_rc_ctrl.work_mode == ROBOT_ROTATE_MOTION_MODE)
-				{
-				chassis->left_right = speed*0.7;
-				chassis->forward_back = speed*rotate_add_d;
-				}
-				else
-				chassis->left_right = speed*0.7;
+				chassis->left_right = speed*3/4;
 			}
 			else
 			{
 				chassis->left_right = 0;
 			}	
 		}
-		
-
 	}	
 }
-float last_yaw_set;
 /**
   * @brief         获取底盘旋转值  云台旋转逆时针编码值变大  左5000 右3000
   * @author         
@@ -368,35 +334,13 @@ float rotate_abs(float val)
 	}
 	return val;
 }
-
-int16_t yaw_raw,delta_yaw=2000,rotate_min=370,rotate_max=550,ROTATE_BASE_SPEED=400;
-uint16_t ROTATE_BUFF_SPEED=500,first_rotate,avge_rotate=300,key_trigger_num;
-int8_t rotate_tend=1;
-float speed_factor0;
-
 void get_rotate_value(chassis_control_data_t *chassis, chassis_pid_t *chassis_pid)
 {
-	//ROTATE_BASE_SPEED = (robot_status.chassis_power_limit-100)/60.0*(rotate_max-rotate_min)+rotate_max; //y=(x-x2)/(x1-x2)*(y1-y2)+y2 (40,400) (100,800)//(40,300) (100,600)
-	switch(key_trigger_num)//这里是按键改变小陀螺的旋转方向，只在静止小陀螺使用，移动小陀螺时使用运动会乱掉，原因不明
-	{
-		case 0:
-			if(chassis->connect->can2_rc_ctrl.mouse.key & ROBOT_RHOMB_MODE_KEY)
-			{
-				rotate_tend=-rotate_tend;
-				key_trigger_num=1;
-			}break;
-		case 1:
-			if(!(chassis->connect->can2_rc_ctrl.mouse.key & ROBOT_RHOMB_MODE_KEY))
-			{
-				key_trigger_num=0;
-			}break;
-		default: break;
-	}
 	if(chassis->connect->can2_rc_ctrl.work_mode == ROBOT_COMMON_MODE)	//	底盘跟随pid
 	{
 		if(chassis->chassis_control_mode_flag)
 		{
-			chassis_pid->rotate_pid.set =  GAMBAL_YAW_INIT_ENCODE_VALUE_RHOMB;//旋转环，让底盘始终保持在固定的一个编码值
+			chassis_pid->rotate_pid.set =  GAMBAL_YAW_INIT_ENCODE_VALUE_RHOMB;
 		}
 		else
 		{	
@@ -404,65 +348,44 @@ void get_rotate_value(chassis_control_data_t *chassis, chassis_pid_t *chassis_pi
 		}
 		chassis_pid->rotate_pid.fdb = (float)(chassis->yaw_motor_msg->encoder.raw_value \
 									+ ((chassis->connect->can2_rc_ctrl.gyro.yaw_set \
-								    -chassis->connect->can2_rc_ctrl.gyro.yaw_fdb) * GAMBAL_YAW_angle_VALUE+0.5f));//0.5
-		
+								    -chassis->connect->can2_rc_ctrl.gyro.yaw_fdb) * GAMBAL_YAW_angle_VALUE+0.5f));//
 		chassis_pid->rotate_pid.Calc(&chassis_pid->rotate_pid);
-//		if(chassis->connect->can2_rc_ctrl.gyro.yaw_set==last_yaw_set)
-//			chassis->rotate = 0;
-//		else
+		
 		chassis->rotate = chassis_pid->rotate_pid.output;//由负修改为正   6.25
-		last_yaw_set = chassis->connect->can2_rc_ctrl.gyro.yaw_set;
-		first_rotate=1;
+		chassis->rotate_buff_flag = 0;
+
 	}
-//		else if(key_open_flag==1&&chassis->connect->can2_rc_ctrl.work_mode == ROBOT_ROTATE_MOTION_MODE)
-//	{
-//	chassis->rotate=300;
-//	}
-	else if(chassis->connect->can2_rc_ctrl.work_mode == ROBOT_ROTATE_MOTION_MODE)   //变速小陀螺    *hyj hzp
+	else if(chassis->connect->can2_rc_ctrl.work_mode == ROBOT_ROTATE_MOTION_MODE)   //变速小陀螺    *hyj
 	{
-		if(RC_abs(chassis->yaw_motor_msg->encoder.raw_value - yaw_raw)>delta_yaw)//当前yaw轴电机编码值大于上一次记录的编码值某个值时
-		{																																				//改变小陀螺速度，编码值最大8192，这里差值为2000时改变一次速度
-		chassis->rotate_buff_flag=1;//改变速度标志位
-		yaw_raw=chassis->yaw_motor_msg->encoder.raw_value;
-		}
-		if(open_num>400)//open_num是wasd键按下后开始计时的时间，按下后过可能1s左右换成匀速运动小陀螺，因为变速小陀螺会影响小陀螺运动
-		{
-			if(chassis->connect->can2_rc_ctrl.mouse.key & CHASSIS_HIGH_SPEED_KEY)
-				chassis->rotate = 550;
-			else
-			chassis->rotate = 400;
-		}
-		else if(chassis->rotate_buff_flag|first_rotate==1)     //进入速度改变赋值 
+		if(freertos_run_time % 1000 == 0)      
         {
-			 srand(xTaskGetTickCount());
-				if(chassis->connect->can2_rc_ctrl.mouse.key & CHASSIS_HIGH_SPEED_KEY)
-					ROTATE_BASE_SPEED = ROTATE_BASE_SPEED+100;
-				chassis->rotate = (rand() % (ROTATE_BASE_SPEED) + ROTATE_BASE_SPEED);//基础速度+基础速度内的随机值
+			srand(xTaskGetTickCount());
+			//czh
+			if(chassis->connect->can2_rc_ctrl.rc.ch3 == 0||chassis->connect->can2_rc_ctrl.rc.ch2 == 0)
+			{
+				chassis->rotate = CHASSIS_ROTATE_STOP_SPEED;//500u;
 				chassis->rotate_buff_flag = 0;
-				first_rotate=0;
-				}
 			}
+			else
+			//czh
+			chassis->rotate = rand() % CHASSIS_ROTATE_BUFF_SPEED + CHASSIS_ROTATE_BASE_SPEED;// 200u;
+			chassis->rotate_buff_flag = 1;
+		}
+	 if(chassis->rotate_buff_flag != 1)     //空档期默认为基础速度       
+	 {
+	 	chassis->rotate = 500u;	//CHASSIS_ROTATE_STOP_SPEED（1000） CHASSIS_ROTATE_BASE_SPEED（600）
+	 }
+	}
 	else if(chassis->connect->can2_rc_ctrl.work_mode == ROBOT_ROTATE_STOP_MODE)	//静止小陀螺
 	{
-if(RC_abs(chassis->yaw_motor_msg->encoder.raw_value - yaw_raw)>delta_yaw)
-		{
-		chassis->rotate_buff_flag=1;
-		yaw_raw=chassis->yaw_motor_msg->encoder.raw_value;
-		}
-		if(chassis->rotate_buff_flag|first_rotate==1)      
-        {
-			 srand(xTaskGetTickCount());
-				chassis->rotate = (rand() % (ROTATE_BASE_SPEED+100) + ROTATE_BASE_SPEED+100)*rotate_tend;
-				chassis->rotate_buff_flag = 0;
-				first_rotate=0;
-				}
+		chassis->rotate = CHASSIS_ROTATE_STOP_SPEED;//1500u;
+		chassis->rotate_buff_flag = 0;
 	}
 	else 
 	{
 		chassis->rotate = 0;
 	}
 }
-
 /**
   * @brief        更新底盘电机设定值和反馈值
   * @author         
@@ -470,13 +393,9 @@ if(RC_abs(chassis->yaw_motor_msg->encoder.raw_value - yaw_raw)>delta_yaw)
   * @retval			
   * @note           
   */
-float speed_factor1_add=0.4,rotate_decrease=0.4,rotate_decrease_x2=900,rotate_decrease_y2=0.85;
-
 void chassis_set_and_fdb_update(chassis_control_data_t *chassis, \
 								chassis_pid_t *chassis_pid)
 {
-	//一次函数两点式，输入为当前等级下的功率最大值，输出为减速因数
-	speed_factor1=(robot_status.chassis_power_limit/100.0-1)/0.6*(1-speed_min/speed_max)+1.0;//y=(x-x2)/(x1-x2)*(y1-y2)+y2 (0.4,0.63) (1,1)
 	switch(chassis->connect->can2_rc_ctrl.work_mode)
 	{
 		case ROBOT_CALI_MODE:
@@ -493,15 +412,12 @@ void chassis_set_and_fdb_update(chassis_control_data_t *chassis, \
 		}break;
 		case ROBOT_COMMON_MODE: //普通底盘跟随模式
 		{
-			
 			get_forward_back_value(chassis);
 			get_rotate_value(chassis, chassis_pid);
 			
-			chassis->forward_back_set= chassis->forward_back*speed_factor1;
-			chassis->left_right_set  = chassis->left_right*(speed_factor1);
-			//根据前后速度来改变旋转量，前后运动速度越快，旋转越快
-			rotate_decrease=(chassis->forward_back_set-rotate_decrease_x2)/rotate_decrease_x2*rotate_decrease_y2+rotate_decrease_y2;// y=(x-x2)/(x1-x2)*(y1-y2)+y2  (0,0) (1000,0.75)
-			chassis->rotate_set 	   = chassis->rotate*(speed_factor1+rotate_decrease);
+			chassis->forward_back_set = chassis->forward_back;
+			chassis->left_right_set = chassis->left_right;
+			chassis->rotate_set = chassis->rotate;
 		}break;
 		case ROBOT_ROTATE_MOTION_MODE: //运动小陀螺模式
 		{
@@ -511,12 +427,17 @@ void chassis_set_and_fdb_update(chassis_control_data_t *chassis, \
 			
 			chassis->rotate_set = chassis->rotate;
 		}break;
-		case ROBOT_ROTATE_STOP_MODE: //静止高速小陀螺模式,不加移动值
+		case ROBOT_ROTATE_STOP_MODE: //静止高速小陀螺模式
 		{
-			get_rotate_value(chassis, chassis_pid);			
+			get_rotate_value(chassis, chassis_pid);
+			
 			chassis->forward_back_set = 0;
 			chassis->left_right_set = 0;
 			chassis->rotate_set = chassis->rotate;
+			// chassis->connect->can2_rc_ctrl.gyro.yaw_set;
+			// chassis->connect->can2_rc_ctrl.gyro.yaw_fdb;
+			// LED_P6x8Str(16,5,(uint8_t *)"yaw_set:");
+			// LED_PrintValueI(75,5,chassis_control_data.connect->can2_rc_ctrl.gyro.yaw_fdb);
 		}break;
 		default:
 		{
@@ -533,15 +454,15 @@ void chassis_set_and_fdb_update(chassis_control_data_t *chassis, \
 #if 0
 	chassis->rotate_set = 0; //单独调试使用 不需要旋转量
 #endif	
+	/*新版限底盘功率应该是在这里改，思路：给四个轮子的转速设定值同时乘上一个比例值，
+	然后根据四个电机电流总和来计算底盘功率，然后一旦这个功率超过裁判系统允许的最大功率（即将超过），
+	就将这个比例系数减小，否则增加*/
 	
-
 	//cm1 为右上电机 依次逆时针
-	//robot_status.robot_level;
 	chassis->cm1_set = - chassis->forward_back_set + chassis->left_right_set + chassis->rotate_set;
 	chassis->cm2_set = chassis->forward_back_set + chassis->left_right_set + chassis->rotate_set;
 	chassis->cm3_set = chassis->forward_back_set - chassis->left_right_set + chassis->rotate_set;
 	chassis->cm4_set = - chassis->forward_back_set - chassis->left_right_set + chassis->rotate_set;
-	
 	
 	chassis->cm1_fdb = chassis->cm1_msg->encoder.filter_rate;
 	chassis->cm2_fdb = chassis->cm2_msg->encoder.filter_rate;
@@ -611,13 +532,14 @@ void chassis_forwardfeed(chassis_control_data_t *chassis)
   * @retval			
   * @note           
   */
+ 
 void chassis_control_loop(chassis_control_data_t *chassis, \
 						  chassis_pid_t *chassis_pid)
 {
-	chassis->given_current.cm1 = chassis_pid->cm1_pid.output;
-	chassis->given_current.cm2 = chassis_pid->cm2_pid.output;
-	chassis->given_current.cm3 = chassis_pid->cm3_pid.output;
-	chassis->given_current.cm4 = chassis_pid->cm4_pid.output;
+	chassis->given_current.cm1 = chassis_pid->cm1_pid.output + chassis->cm1_ff;
+	chassis->given_current.cm2 = chassis_pid->cm2_pid.output + chassis->cm2_ff;
+	chassis->given_current.cm3 = chassis_pid->cm3_pid.output + chassis->cm3_ff;
+	chassis->given_current.cm4 = chassis_pid->cm4_pid.output + chassis->cm4_ff;
 	
 	if(chassis->connect->can2_rc_ctrl.control_mode == GUI_CALI_MODE)
 	{
@@ -674,12 +596,12 @@ void chassis_task(void *argument)
 
 	vTaskDelay(CHASSIS_TASK_INIT_TIME);
 	chassis_init(&chassis_control_data, &chassis_pid);
+	
 	while(1)
 	{
-		
 		current_time = xTaskGetTickCount();                         //当前系统时间       *hyj
 		chassis_set_and_fdb_update(&chassis_control_data, &chassis_pid);
-		//chassis_power_limit();
+		chassis_power_limit();
 		chassis_pid_calculate(&chassis_control_data, &chassis_pid);
 		chassis_forwardfeed(&chassis_control_data);
 		chassis_control_loop(&chassis_control_data, &chassis_pid);
@@ -687,7 +609,7 @@ void chassis_task(void *argument)
 		// {
 		// 	set_GUI_task_state(&chassis_control_data);
 		// }
-		vTaskDelayUntil(&current_time, 1);       //1ms一次，任务挂起时间，可以看成任务的运行频率        *hyj
+		vTaskDelayUntil(&current_time, 1);       //1ms一次         *hyj
 	}
 }
 
