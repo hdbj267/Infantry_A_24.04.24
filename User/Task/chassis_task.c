@@ -34,7 +34,7 @@ float out;
 float CHASSIS_RC_CTRL_SPPED_MAX_FACT = 1.2;//最大跑动不超功率(?这里说的应该是等级最低级的情况，也就是功率为50的时候)
 
 //前馈控制，输入值为当前转速，输出为前馈量，在发给电机的电流值里加上能够提高系统响应 *hzp
-float forwardfeed(float in)
+float forwardfeed(float in)	
 {
 	if(in<17)
 		out=0;
@@ -118,7 +118,7 @@ void chassis_init(chassis_control_data_t *chassis, chassis_pid_t *chassis_pid)
   * @retval			
   * @note        //前面会出现负号，是因为6020是反向安装的，也可根据实际调试得到 
   */
-void rotate_motion_mode_process(chassis_control_data_t *chassis)
+void rotate_motion_mode_process(chassis_control_data_t *chassis)	//**
 {
 	chassis->rotate_motion.yaw_current_ecd = chassis->yaw_motor_msg->encoder.raw_value;
 	if(chassis->chassis_control_mode_flag)
@@ -188,7 +188,7 @@ uint8_t key_open_flag,last_key_open_flag,move_key_open_flag,trigger_key,last_key
 float speed_factor1,speed_factor2,speed_factor3;
 float rotate_add_w=0.1,rotate_add_s=0.1,rotate_add_a=0.1,rotate_add_d=0.1;//这四个是移动小陀螺补偿系数
 
-void get_forward_back_value(chassis_control_data_t *chassis)
+void get_forward_back_value(chassis_control_data_t *chassis)	//****
 {
 	
 //根据当前允许的最大功率来限制移动速度，旋转速度，小陀螺速度来达到限底盘功率的方案 *hzp
@@ -374,7 +374,7 @@ uint16_t ROTATE_BUFF_SPEED=500,first_rotate,avge_rotate=300,key_trigger_num;
 int8_t rotate_tend=1;
 float speed_factor0;
 
-void get_rotate_value(chassis_control_data_t *chassis, chassis_pid_t *chassis_pid)
+void get_rotate_value(chassis_control_data_t *chassis, chassis_pid_t *chassis_pid)	//****
 {
 	//ROTATE_BASE_SPEED = (robot_status.chassis_power_limit-100)/60.0*(rotate_max-rotate_min)+rotate_max; //y=(x-x2)/(x1-x2)*(y1-y2)+y2 (40,400) (100,800)//(40,300) (100,600)
 	switch(key_trigger_num)//这里是按键改变小陀螺的旋转方向，只在静止小陀螺使用，移动小陀螺时使用运动会乱掉，原因不明
@@ -472,8 +472,8 @@ if(RC_abs(chassis->yaw_motor_msg->encoder.raw_value - yaw_raw)>delta_yaw)
   */
 float speed_factor1_add=0.4,rotate_decrease=0.4,rotate_decrease_x2=900,rotate_decrease_y2=0.85;
 
-void chassis_set_and_fdb_update(chassis_control_data_t *chassis, \
-								chassis_pid_t *chassis_pid)
+void chassis_set_and_fdb_update(chassis_control_data_t *chassis, 		//****
+								chassis_pid_t *chassis_pid)	
 {
 	//一次函数两点式，输入为当前等级下的功率最大值，输出为减速因数
 	speed_factor1=(robot_status.chassis_power_limit/100.0-1)/0.6*(1-speed_min/speed_max)+1.0;//y=(x-x2)/(x1-x2)*(y1-y2)+y2 (0.4,0.63) (1,1)
@@ -565,7 +565,7 @@ void chassis_set_and_fdb_update(chassis_control_data_t *chassis, \
   * @retval			
   * @note           
   */
-void chassis_pid_calculate(chassis_control_data_t *chassis,  \
+void chassis_pid_calculate(chassis_control_data_t *chassis,  //***
 						   chassis_pid_t *chassis_pid)
 {
 	chassis_pid->cm1_pid.set = chassis->cm1_set;
@@ -611,7 +611,7 @@ void chassis_forwardfeed(chassis_control_data_t *chassis)
   * @retval			
   * @note           
   */
-void chassis_control_loop(chassis_control_data_t *chassis, \
+void chassis_control_loop(chassis_control_data_t *chassis, //***
 						  chassis_pid_t *chassis_pid)
 {
 	chassis->given_current.cm1 = chassis_pid->cm1_pid.output;

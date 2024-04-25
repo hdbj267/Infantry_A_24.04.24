@@ -36,7 +36,7 @@ motor_msg_t yaw_motor_msg = {0};
   * @note    默认电机的can发送频率为1KHZ       
   */ 
 
-static void yaw_motor_msg_process(motor_msg_t *m, uint8_t aData[])
+static void yaw_motor_msg_process(motor_msg_t *m, uint8_t aData[])	//**
 {
 	int16_t i;
 	m->encoder.filter_rate_sum = 0;//进入清零
@@ -90,7 +90,7 @@ static void yaw_motor_msg_process(motor_msg_t *m, uint8_t aData[])
 }
 
 extern chassis_pid_t chassis_pid;
-void can2_message_progress(CAN_RxHeaderTypeDef *pHeader, uint8_t aData[])
+void can2_message_progress(CAN_RxHeaderTypeDef *pHeader, uint8_t aData[])	//***
 {
 	if(pHeader == NULL || aData == NULL )
 	{
@@ -128,7 +128,7 @@ extern power_heat_data_t power_heat;
 extern shoot_data_t shoot_data; 
 extern hurt_data_t robot_hurt;
 
-void send_shoot_17mm_data(robot_status_t *robot_status)  
+void send_shoot_17mm_data(robot_status_t *robot_status)  	//***
 {
 	can2_tx_header.StdId = CAN2_SHOOT_17mm_ID;
     can2_tx_header.IDE = CAN_ID_STD;
@@ -139,13 +139,13 @@ void send_shoot_17mm_data(robot_status_t *robot_status)
     can2_tx_data[1] = (uint8_t)(robot_status->shooter_barrel_cooling_value);
     can2_tx_data[2] = (uint8_t)(robot_status->shooter_barrel_heat_limit>>8);
     can2_tx_data[3] = (uint8_t)(robot_status->shooter_barrel_heat_limit);
-		can2_tx_data[4] = (uint8_t)(30>>8);//
+	can2_tx_data[4] = (uint8_t)(30>>8);//
     can2_tx_data[5] = (uint8_t)(30);
     can2_tx_data[6] = (uint8_t)(power_heat.shooter_17mm_1_barrel_heat>>8);
     can2_tx_data[7] = (uint8_t)(power_heat.shooter_17mm_1_barrel_heat);//改为枪口热量
 	HAL_CAN_AddTxMessage(&hcan2, &can2_tx_header, can2_tx_data, (uint32_t *) CAN_TX_MAILBOX0);
 }
-void send_shoot_judge_data(void)  
+void send_shoot_judge_data(void)  //***
 {
 	can2_tx_header.StdId = CAN2_SHOOT_JUDGE_ID;
     can2_tx_header.IDE = CAN_ID_STD;

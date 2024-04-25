@@ -33,7 +33,7 @@ extern robot_status_t robot_status;
   * @retval	
   * @note        
   */
-void connect_rc_ctrl_process(connect_t *connect_data, uint8_t aData[])
+void connect_rc_ctrl_process(connect_t *connect_data, uint8_t aData[])	//**
 {
 	connect_data->can2_rc_ctrl.control_mode = (aData[0]);
 //	connect_data->can2_rc_ctrl.mouse.mouse_flag = aData[0]>>7;
@@ -55,7 +55,7 @@ typedef union float_char_
 	uint8_t c[4];
 }float_char;
 
-void connect_gyro_data_process(connect_t *connect_data, uint8_t aData[])
+void connect_gyro_data_process(connect_t *connect_data, uint8_t aData[])	//**
 {
 //	if(aData[0]=='J'&&aData[3]=='K')
 //	{
@@ -78,7 +78,7 @@ void connect_gyro_data_process(connect_t *connect_data, uint8_t aData[])
 	connect_data->receive_rc_data_flag = 1;//表示已经接收到了can2的rc数据
 }
 
-void get_uiflag_to_chassis(connect_t *connect_data, uint8_t aData[])
+void get_uiflag_to_chassis(connect_t *connect_data, uint8_t aData[])		//**
 {
   connect_data->recog_flag=aData[0];;
   connect_data->vision_flag=aData[1];

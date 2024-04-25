@@ -190,7 +190,7 @@ void Append_CRC16_Check_Sum(uint8_t * pchMessage,uint32_t dwLength)
   * @retval	
   * @note       获取电源管理模块发送的数据，中断处理防止数据覆盖，115200
 */
-void process_judge_message(uint8_t *ReadFromUsart)
+void process_judge_message(uint8_t *ReadFromUsart)		//***
 {
 	judge_manegement.frame_header.SOF = ReadFromUsart[0];
 	if(judge_manegement.frame_header.SOF == 0XA5 )
