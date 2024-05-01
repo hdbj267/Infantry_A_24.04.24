@@ -14,11 +14,19 @@ tip:在工程里面看才是正常格式
 
 重点关注下面的task和app(重要度排序)：
 chassis_task/
+
 connect_task/
+
 can1_app/
+
 can2_app/
+
 judge/
+
 start_task
+
 初此之外，还要关注
+
 stm32f4xx_it.c/
+
 其他的基本上用不上/不重点关注
