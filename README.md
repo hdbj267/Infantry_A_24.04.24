@@ -21,9 +21,9 @@ can1_app/
 
 can2_app/
 
-judge/
+judge/裁判系统移植，每年都要去官网看看有没有更新串口协议，工作就是替换帧头和结构体内容
 
-start_task
+start_task/任务添加，堆栈大小设置
 
 初此之外，还要关注
 
