@@ -103,7 +103,7 @@ const uint8 F6x8[][6] =
 //中文字符串原字
 const uint8 F14x16_Idx[] = 
 {
-	"洪奕鸿"
+	""
 };
 
 const uint8 F14x16[] = {0};

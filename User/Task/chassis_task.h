@@ -35,6 +35,7 @@
 
 
 #define CHASSIS_TASK_INIT_TIME           (200)                        //任务开启前延时 单位ms
+#define CHASSIS_RC_CTRL_SPPED_MAX_FACT   (1.2f)																						//1.2f最大跑动不超功率
 
 
 #define CHASSIS_MOUSE_CTRL_NORMAL_SPPED  (1500.0f)                    //鼠标控制时的 速度

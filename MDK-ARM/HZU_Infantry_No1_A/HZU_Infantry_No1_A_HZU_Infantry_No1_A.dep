@@ -58,7 +58,7 @@ I (../Core/Inc/tim.h)(0x666FB2D6)
 I (../Core/Inc/usart.h)(0x666FB2D6)
 I (../Core/Inc/gpio.h)(0x666FB2D6)
 I (..\Components\devices\oled.h)(0x666FB2D6)
-I (..\User\Task\chassis_task.h)(0x666FB2D8)
+I (..\User\Task\chassis_task.h)(0x666FC639)
 I (..\Components\controller\pid.h)(0x666FB2D6)
 I (..\User\Task\connect_task.h)(0x666FB2D8)
 I (..\User\App\can1_app.h)(0x666FB2D8)
@@ -181,7 +181,7 @@ I (..\Components\devices\oled.h)(0x666FB2D6)
 I (..\User\App\can1_app.h)(0x666FB2D8)
 I (..\User\App\can2_app.h)(0x666FB2D8)
 I (..\User\App\judge.h)(0x666FB2D8)
-I (..\User\Task\chassis_task.h)(0x666FB2D8)
+I (..\User\Task\chassis_task.h)(0x666FC639)
 I (..\Components\controller\pid.h)(0x666FB2D6)
 I (..\User\Task\connect_task.h)(0x666FB2D8)
 I (..\User\Task\GUI_task.h)(0x666FB2D8)
@@ -302,7 +302,7 @@ I (../Core/Inc/tim.h)(0x666FB2D6)
 I (../Core/Inc/usart.h)(0x666FB2D6)
 I (../Core/Inc/gpio.h)(0x666FB2D6)
 I (..\Components\devices\oled.h)(0x666FB2D6)
-I (..\User\Task\chassis_task.h)(0x666FB2D8)
+I (..\User\Task\chassis_task.h)(0x666FC639)
 I (..\Components\controller\pid.h)(0x666FB2D6)
 I (..\User\Task\connect_task.h)(0x666FB2D8)
 I (..\User\App\can1_app.h)(0x666FB2D8)
@@ -424,7 +424,7 @@ I (../Core/Inc/dma.h)(0x666FB2D6)
 I (../Core/Inc/usart.h)(0x666FB2D6)
 I (../Core/Inc/gpio.h)(0x666FB2D6)
 I (..\Components\devices\oled.h)(0x666FB2D6)
-I (..\User\Task\chassis_task.h)(0x666FB2D8)
+I (..\User\Task\chassis_task.h)(0x666FC639)
 I (..\Components\controller\pid.h)(0x666FB2D6)
 I (..\User\Task\connect_task.h)(0x666FB2D8)
 I (..\User\App\can1_app.h)(0x666FB2D8)
@@ -1699,7 +1699,7 @@ I (../Core/Inc/tim.h)(0x666FB2D6)
 I (../Core/Inc/usart.h)(0x666FB2D6)
 I (../Core/Inc/gpio.h)(0x666FB2D6)
 I (..\Components\devices\oled.h)(0x666FB2D6)
-F (..\Components\devices\oled.c)(0x666FBB47)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\oled.o --omf_browse hzu_infantry_no1_a\oled.crf --depend hzu_infantry_no1_a\oled.d)
+F (..\Components\devices\oled.c)(0x666FC663)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\oled.o --omf_browse hzu_infantry_no1_a\oled.crf --depend hzu_infantry_no1_a\oled.d)
 I (..\Components\devices\oled.h)(0x666FB2D6)
 I (../Core/Inc/main.h)(0x666FB2D6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x666FB2D7)
@@ -1818,7 +1818,7 @@ I (../Core/Inc/tim.h)(0x666FB2D6)
 I (../Core/Inc/usart.h)(0x666FB2D6)
 I (../Core/Inc/gpio.h)(0x666FB2D6)
 I (..\Components\devices\oled.h)(0x666FB2D6)
-F (..\User\App\can2_app.c)(0x666FBB48)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\can2_app.o --omf_browse hzu_infantry_no1_a\can2_app.crf --depend hzu_infantry_no1_a\can2_app.d)
+F (..\User\App\can2_app.c)(0x666FC584)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\can2_app.o --omf_browse hzu_infantry_no1_a\can2_app.crf --depend hzu_infantry_no1_a\can2_app.d)
 I (..\Drivers\System\delay.h)(0x666FB2D7)
 I (..\Drivers\System\sys.h)(0x666FB2D7)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x666FB2D7)
@@ -1881,8 +1881,8 @@ I (../Core/Inc/gpio.h)(0x666FB2D6)
 I (..\Components\devices\oled.h)(0x666FB2D6)
 I (..\User\App\can2_app.h)(0x666FB2D8)
 I (..\User\App\judge.h)(0x666FB2D8)
-I (..\User\Task\chassis_task.h)(0x666FB2D8)
-F (..\User\App\judge.c)(0x666FBB48)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\judge.o --omf_browse hzu_infantry_no1_a\judge.crf --depend hzu_infantry_no1_a\judge.d)
+I (..\User\Task\chassis_task.h)(0x666FC639)
+F (..\User\App\judge.c)(0x666FC584)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\judge.o --omf_browse hzu_infantry_no1_a\judge.crf --depend hzu_infantry_no1_a\judge.d)
 I (..\User\App\judge.h)(0x666FB2D8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x666FB2D7)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x666FB2D6)
@@ -2045,8 +2045,8 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x666FB2D7)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x666FB2D7)
 I (../Core/Inc/struct_typedef.h)(0x666FB2D6)
 I (..\User\App\can1_app.h)(0x666FB2D8)
-F (..\User\Task\chassis_task.c)(0x666FBB48)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\chassis_task.o --omf_browse hzu_infantry_no1_a\chassis_task.crf --depend hzu_infantry_no1_a\chassis_task.d)
-I (..\User\Task\chassis_task.h)(0x666FB2D8)
+F (..\User\Task\chassis_task.c)(0x666FC584)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\chassis_task.o --omf_browse hzu_infantry_no1_a\chassis_task.crf --depend hzu_infantry_no1_a\chassis_task.d)
+I (..\User\Task\chassis_task.h)(0x666FC639)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x666FB2D7)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x666FB2D6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x666FB2D7)
@@ -2113,7 +2113,7 @@ I (..\User\App\rule.h)(0x666FB2D8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (C:\Keil_v5\ARM\ARMCC\include\time.h)(0x60252378)
-F (..\User\Task\connect_task.c)(0x666FBB48)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\connect_task.o --omf_browse hzu_infantry_no1_a\connect_task.crf --depend hzu_infantry_no1_a\connect_task.d)
+F (..\User\Task\connect_task.c)(0x666FC584)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\connect_task.o --omf_browse hzu_infantry_no1_a\connect_task.crf --depend hzu_infantry_no1_a\connect_task.d)
 I (..\User\Task\connect_task.h)(0x666FB2D8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x666FB2D7)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x666FB2D6)
@@ -2176,7 +2176,7 @@ I (../Core/Inc/gpio.h)(0x666FB2D6)
 I (..\Components\devices\oled.h)(0x666FB2D6)
 I (..\User\App\can2_app.h)(0x666FB2D8)
 I (..\User\App\judge.h)(0x666FB2D8)
-I (..\User\Task\chassis_task.h)(0x666FB2D8)
+I (..\User\Task\chassis_task.h)(0x666FC639)
 F (..\User\Task\GUI_task.c)(0x666FB2D8)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\Drivers\System -I ..\Components\controller -I ..\Components\algorithm -I ..\Components\algorithm\Include -I ..\User\App -I ..\User\Task -I ..\Components\devices -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F427xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F427xx-o hzu_infantry_no1_a\gui_task.o --omf_browse hzu_infantry_no1_a\gui_task.crf --depend hzu_infantry_no1_a\gui_task.d)
 I (..\User\Task\GUI_task.h)(0x666FB2D8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x666FB2D7)
@@ -2214,7 +2214,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x666FB2D7)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x666FB2D7)
 I (../Core/Inc/struct_typedef.h)(0x666FB2D6)
 I (..\User\App\remote_app.h)(0x666FB2D8)
-I (..\User\Task\chassis_task.h)(0x666FB2D8)
+I (..\User\Task\chassis_task.h)(0x666FC639)
 I (..\Components\controller\pid.h)(0x666FB2D6)
 I (../Core/Inc/main.h)(0x666FB2D6)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
@@ -2293,7 +2293,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x666FB2D7)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x666FB2D7)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x666FB2D7)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x666FB2D7)
-I (..\User\Task\chassis_task.h)(0x666FB2D8)
+I (..\User\Task\chassis_task.h)(0x666FC639)
 I (..\Components\controller\pid.h)(0x666FB2D6)
 I (../Core/Inc/main.h)(0x666FB2D6)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
@@ -2379,5 +2379,5 @@ I (..\User\Task\connect_task.h)(0x666FB2D8)
 I (..\User\App\can1_app.h)(0x666FB2D8)
 I (..\Components\controller\pid.h)(0x666FB2D6)
 F (..\Read_Me.txt)(0x666FB2D8)()
-F (..\README.md)(0x666FC2DC)()
+F (..\README.md)(0x666FC584)()
 F (.\startup_stm32f427xx.s)(0x666FB2D7)(--cpu Cortex-M4.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1" -I ..\Core\Inc-I.\RTE\_HZU_Infantry_No1_A-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 536" --pd "_RTE_ SETA 1" --pd "STM32F427xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f427xx.lst --xref -o hzu_infantry_no1_a\startup_stm32f427xx.o --depend hzu_infantry_no1_a\startup_stm32f427xx.d)
