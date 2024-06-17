@@ -698,6 +698,16 @@
               <FileType>1</FileType>
               <FilePath>..\User\Task\test_task.c</FilePath>
             </File>
+            <File>
+              <FileName>Read_Me.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Read_Me.txt</FilePath>
+            </File>
+            <File>
+              <FileName>README.md</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\README.md</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
